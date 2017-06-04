@@ -1,6 +1,7 @@
 import React from 'react';
 import Formulaire from './formulaire';
 import Message from './message';
+import base from '../base';
 
 class App extends React.Component {
 
@@ -8,10 +9,18 @@ class App extends React.Component {
 		messages: {}
 	}
 
+	componentWillMount() {
+		this.ref = base.syncState('/', {
+			context: this,
+			state: 'messages'
+		})
+	}
+
 	addMessage = message => {
 		const messages = {...this.state.messages};
 		const timestamp = Date.now();
 		messages[`message-${timestamp}`] = message;
+		Object.keys(messages).slice(0, -10).map(key => messages[key] = null);
 		this.setState({ messages });
 	};
 
