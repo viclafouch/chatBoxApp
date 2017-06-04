@@ -40,6 +40,10 @@ class Formulaire extends React.Component {
 			</form>
 		)
 	}
+
+	static propsTypes = {
+		addMessage: React.PropTypes.func.isRequired
+	};
 }
 
 export default Formulaire;
